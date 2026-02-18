@@ -1,5 +1,25 @@
 [
   {
+    "id": "ec9d92b6-9723-46f8-8bfb-716113c68169",
+    "created_at": "2026-02-18T16:42:44.453356+00:00",
+    "updated_at": "2026-02-18T16:42:44.453366+00:00",
+    "prompt": "buat meja kerja 120 x 60 cm",
+    "params": {
+      "shape_type": "box",
+      "width": 120.0,
+      "length": 60.0,
+      "height": 75.0,
+      "diameter": null,
+      "legs": null,
+      "doors": null,
+      "windows": null,
+      "description": "Meja kerja"
+    },
+    "dxf_filename": "c1135770-4755-46eb-a242-2731422b813f.dxf",
+    "stl_filename": null,
+    "svg_preview": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"-57.8 -204.8 417.6 314.6\" \nwidth=\"800\" height=\"600\" style=\"background:#0f172a;border-radius:12px;\">\n<g transform=\"translate(0, -95.0) scale(1, -1)\">\n<g transform=\"translate(0.0,75.0) scale(1,-1)\"><text font-size=\"4.0\" fill=\"#4ade80\" font-family=\"monospace\">TAMPAK ATAS</text></g>\n<polygon points=\"0.0,0.0 120.0,0.0 120.0,60.0 0.0,60.0\" fill=\"none\" stroke=\"#e2e8f0\" stroke-width=\"1\"/>\n<line x1=\"0.0\" y1=\"-15.0\" x2=\"120.0\" y2=\"-15.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<line x1=\"0.0\" y1=\"0.0\" x2=\"0.0\" y2=\"-15.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<line x1=\"120.0\" y1=\"0.0\" x2=\"120.0\" y2=\"-15.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<g transform=\"translate(60.0,-20.0) scale(1,-1)\"><text font-size=\"3.0\" fill=\"#f87171\" font-family=\"monospace\">120</text></g>\n<line x1=\"135.0\" y1=\"0.0\" x2=\"135.0\" y2=\"60.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<line x1=\"120.0\" y1=\"0.0\" x2=\"135.0\" y2=\"0.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<line x1=\"120.0\" y1=\"60.0\" x2=\"135.0\" y2=\"60.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<g transform=\"translate(127.0,30.0) scale(1,-1)\"><text font-size=\"3.0\" fill=\"#f87171\" font-family=\"monospace\">60</text></g>\n<g transform=\"translate(0.0,-60.0) scale(1,-1)\"><text font-size=\"4.0\" fill=\"#4ade80\" font-family=\"monospace\">TAMPAK DEPAN</text></g>\n<polygon points=\"0.0,-150.0 120.0,-150.0 120.0,-75.0 0.0,-75.0\" fill=\"none\" stroke=\"#93c5fd\" stroke-width=\"1\"/>\n<line x1=\"0.0\" y1=\"-165.0\" x2=\"120.0\" y2=\"-165.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<line x1=\"0.0\" y1=\"-150.0\" x2=\"0.0\" y2=\"-165.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<line x1=\"120.0\" y1=\"-150.0\" x2=\"120.0\" y2=\"-165.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<g transform=\"translate(60.0,-170.0) scale(1,-1)\"><text font-size=\"3.0\" fill=\"#f87171\" font-family=\"monospace\">120</text></g>\n<line x1=\"-15.0\" y1=\"-150.0\" x2=\"-15.0\" y2=\"-75.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<line x1=\"0.0\" y1=\"-150.0\" x2=\"-15.0\" y2=\"-150.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<line x1=\"0.0\" y1=\"-75.0\" x2=\"-15.0\" y2=\"-75.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<g transform=\"translate(-23.0,-112.5) scale(1,-1)\"><text font-size=\"3.0\" fill=\"#f87171\" font-family=\"monospace\">75</text></g>\n<g transform=\"translate(250.0,-60.0) scale(1,-1)\"><text font-size=\"4.0\" fill=\"#4ade80\" font-family=\"monospace\">TAMPAK SAMPING</text></g>\n<polygon points=\"250.0,-150.0 310.0,-150.0 310.0,-75.0 250.0,-75.0\" fill=\"none\" stroke=\"#22d3ee\" stroke-width=\"1\"/>\n<line x1=\"250.0\" y1=\"-165.0\" x2=\"310.0\" y2=\"-165.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<line x1=\"250.0\" y1=\"-150.0\" x2=\"250.0\" y2=\"-165.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<line x1=\"310.0\" y1=\"-150.0\" x2=\"310.0\" y2=\"-165.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<g transform=\"translate(280.0,-170.0) scale(1,-1)\"><text font-size=\"3.0\" fill=\"#f87171\" font-family=\"monospace\">60</text></g>\n<line x1=\"325.0\" y1=\"-150.0\" x2=\"325.0\" y2=\"-75.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<line x1=\"310.0\" y1=\"-150.0\" x2=\"325.0\" y2=\"-150.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<line x1=\"310.0\" y1=\"-75.0\" x2=\"325.0\" y2=\"-75.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<g transform=\"translate(317.0,-112.5) scale(1,-1)\"><text font-size=\"3.0\" fill=\"#f87171\" font-family=\"monospace\">75</text></g>\n</g>\n</svg>"
+  },
+  {
     "id": "3e40c5df-175f-4c35-8a62-ba8a253d468b",
     "created_at": "2026-02-18T16:29:45.936123+00:00",
     "updated_at": "2026-02-18T16:29:45.936133+00:00",

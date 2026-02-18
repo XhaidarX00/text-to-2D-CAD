@@ -3,6 +3,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# Vercel serverless has a read-only filesystem; only /tmp is writable
+IS_VERCEL = os.getenv("VERCEL", "") == "1"
+
 
 class Settings:
     """Global application settings loaded from environment."""
@@ -10,7 +13,7 @@ class Settings:
     PROJECT_NAME = "AI CAD Architect"
     VERSION = "1.0.0"
     GROQ_API_KEY: str = os.getenv("GROQ_API_KEY", "")
-    OUTPUT_DIR: str = "outputs"
+    OUTPUT_DIR: str = "/tmp/outputs" if IS_VERCEL else "outputs"
 
     # AI Model Configuration
     LLM_MODEL = "llama-3.3-70b-versatile"
