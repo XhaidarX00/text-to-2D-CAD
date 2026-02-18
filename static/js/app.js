@@ -25,23 +25,45 @@ const paramsTable = document.getElementById('paramsTable');
 const downloadBtn = document.getElementById('downloadBtn');
 const svgContainer = document.getElementById('svgPreviewArea');
 
+// Track if result is showing (for auto-reset)
+let _hasResult = false;
+
+/** Reset result panel when user starts new input */
+function autoResetIfNeeded() {
+    if (_hasResult) {
+        setUIState('empty');
+        if (svgContainer) svgContainer.innerHTML = '';
+        _hasResult = false;
+    }
+}
 
 
 // Audio recording
 let mediaRecorder;
 let audioChunks = [];
 let audioBlob = null;
+let _isRecording = false;
+let _audioStream = null;
 
-// ========== Voice Recording ==========
-recordBtn.addEventListener('mousedown', startRec);
-recordBtn.addEventListener('touchstart', (e) => { e.preventDefault(); startRec(); });
-window.addEventListener('mouseup', stopRec);
-window.addEventListener('touchend', stopRec);
+// ========== Voice Recording (Tap-to-Toggle) ==========
+recordBtn.addEventListener('click', toggleRec);
+
+// Auto-reset on text input
+textInput.addEventListener('input', autoResetIfNeeded);
+
+async function toggleRec() {
+    if (_isRecording) {
+        stopRec();
+    } else {
+        await startRec();
+    }
+}
 
 async function startRec() {
+    autoResetIfNeeded();
     try {
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        mediaRecorder = new MediaRecorder(stream);
+        _audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(_audioStream);
         audioChunks = [];
 
         mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
@@ -50,12 +72,17 @@ async function startRec() {
             micIcon.className = "w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-xl mb-2 transition-colors";
             recordText.innerText = "Suara Tersimpan ✓";
             recordBtn.classList.add('border-emerald-200', 'bg-emerald-50/10');
-            stream.getTracks().forEach(track => track.stop());
+            if (_audioStream) {
+                _audioStream.getTracks().forEach(track => track.stop());
+                _audioStream = null;
+            }
+            _isRecording = false;
         };
 
         mediaRecorder.start();
+        _isRecording = true;
         micIcon.className = "w-12 h-12 bg-red-500 text-white rounded-full flex items-center justify-center text-xl mb-2 recording-pulse z-10";
-        recordText.innerText = "Merekam...";
+        recordText.innerText = "Merekam... (tap untuk stop)";
 
     } catch (err) {
         showToast("Butuh akses mikrofon untuk merekam.", "error");
@@ -70,6 +97,7 @@ function stopRec() {
 
 // ========== Image Preview ==========
 function handleImagePreview(input) {
+    autoResetIfNeeded();
     if (input.files && input.files[0]) {
         const file = input.files[0];
         if (file.size > 5 * 1024 * 1024) {
@@ -100,8 +128,13 @@ function clearAllInputs() {
     // Clear audio
     audioBlob = null;
     audioChunks = [];
+    _isRecording = false;
+    if (_audioStream) {
+        _audioStream.getTracks().forEach(track => track.stop());
+        _audioStream = null;
+    }
     micIcon.className = "w-12 h-12 bg-indigo-500/20 text-brand-400 rounded-full flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition-transform";
-    recordText.innerText = "Tahan untuk Bicara";
+    recordText.innerText = "Tap untuk Rekam";
     recordBtn.classList.remove('border-emerald-200', 'bg-emerald-50/10');
 
     // Clear image
@@ -151,6 +184,7 @@ async function generateCAD() {
             // Clear all inputs AFTER successful generation
             clearAllInputs();
             showSuccess(result, 'generate');
+            _hasResult = true;
 
         } else {
             showToast('Gagal: ' + (result.message || 'Unknown error'), 'error');
@@ -204,78 +238,78 @@ function showSuccess(result, source = 'generate') {
 
     if (source === 'generate') {
         showToast('CAD Blueprint berhasil dibuat!', 'success');
+    }
+}
 
+async function export3D() {
+    if (!window._currentDxfFile) {
+        showToast('Generate CAD terlebih dahulu.', 'error');
+        return;
     }
 
-    async function export3D() {
-        if (!window._currentDxfFile) {
-            showToast('Generate CAD terlebih dahulu.', 'error');
-            return;
+    const btn = document.getElementById('export3dBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin mr-2"></i>Exporting...';
+
+    try {
+        const response = await fetch(`/api/export-3d/${window._currentDxfFile}`, { method: 'POST' });
+        const result = await response.json();
+
+        if (result.status === 'success') {
+            const a = document.createElement('a');
+            a.href = result.download_url;
+            a.download = '';
+            a.click();
+            showToast('File STL berhasil di-export!', 'success');
+        } else {
+            showToast('3D export gagal: ' + result.message, 'error');
         }
-
-        const btn = document.getElementById('export3dBtn');
-        btn.disabled = true;
-        btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin mr-2"></i>Exporting...';
-
-        try {
-            const response = await fetch(`/api/export-3d/${window._currentDxfFile}`, { method: 'POST' });
-            const result = await response.json();
-
-            if (result.status === 'success') {
-                const a = document.createElement('a');
-                a.href = result.download_url;
-                a.download = '';
-                a.click();
-                showToast('File STL berhasil di-export!', 'success');
-            } else {
-                showToast('3D export gagal: ' + result.message, 'error');
-            }
-        } catch (error) {
-            showToast('Gagal export 3D.', 'error');
-        }
-
-        btn.disabled = false;
-        btn.innerHTML = '<i class="fa-solid fa-cube mr-2"></i>Export 3D (STL)';
+    } catch (error) {
+        showToast('Gagal export 3D.', 'error');
     }
 
-    // ========== UI State Management ==========
-    function setUIState(state) {
-        emptyState.classList.add('hidden');
-        loadingState.classList.add('hidden');
-        successState.classList.add('hidden');
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fa-solid fa-cube mr-2"></i>Export 3D (STL)';
+}
 
-        if (state === 'empty') {
-            emptyState.classList.remove('hidden');
-            generateBtn.disabled = false;
-            generateBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-        } else if (state === 'loading') {
-            loadingState.classList.remove('hidden');
-            loadingText.innerText = 'Memproses input...';
-            generateBtn.disabled = true;
-            generateBtn.classList.add('opacity-50', 'cursor-not-allowed');
-        } else if (state === 'success') {
-            successState.classList.remove('hidden');
-            generateBtn.disabled = false;
-            generateBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-        }
+// ========== UI State Management ==========
+function setUIState(state) {
+    emptyState.classList.add('hidden');
+    loadingState.classList.add('hidden');
+    successState.classList.add('hidden');
+
+    if (state === 'empty') {
+        emptyState.classList.remove('hidden');
+        generateBtn.disabled = false;
+        generateBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+    } else if (state === 'loading') {
+        loadingState.classList.remove('hidden');
+        loadingText.innerText = 'Memproses input...';
+        generateBtn.disabled = true;
+        generateBtn.classList.add('opacity-50', 'cursor-not-allowed');
+    } else if (state === 'success') {
+        successState.classList.remove('hidden');
+        generateBtn.disabled = false;
+        generateBtn.classList.remove('opacity-50', 'cursor-not-allowed');
     }
+}
 
-    function resetUI() {
-        setUIState('empty');
-        clearAllInputs();
-        if (svgContainer) svgContainer.innerHTML = '';
-    }
+function resetUI() {
+    setUIState('empty');
+    clearAllInputs();
+    if (svgContainer) svgContainer.innerHTML = '';
+}
 
-    // ========== Toast Notifications ==========
-    function showToast(message, type = 'info') {
-        const toast = document.createElement('div');
-        toast.className = `toast toast-${type}`;
-        toast.innerText = message;
-        document.body.appendChild(toast);
+// ========== Toast Notifications ==========
+function showToast(message, type = 'info') {
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+    toast.innerText = message;
+    document.body.appendChild(toast);
 
-        setTimeout(() => {
-            toast.style.opacity = '0';
-            toast.style.transition = 'opacity 0.3s';
-            setTimeout(() => toast.remove(), 300);
-        }, 3000);
-    }
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transition = 'opacity 0.3s';
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
