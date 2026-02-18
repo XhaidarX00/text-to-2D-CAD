@@ -227,34 +227,7 @@
         </section>
     </main>
 
-    <!-- History Panel -->
-    <section class="max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-6">
-        <div class="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden">
-            <!-- History Header -->
-            <div class="flex items-center justify-between p-4 border-b border-slate-800">
-                <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 bg-amber-500/15 text-amber-400 rounded-lg flex items-center justify-center">
-                        <i class="fa-solid fa-clock-rotate-left text-sm"></i>
-                    </div>
-                    <h3 class="font-bold text-white text-sm">History</h3>
-                    <span id="historyCount"
-                        class="text-[10px] font-bold text-slate-500 bg-slate-800 px-2 py-0.5 rounded-full border border-slate-700">0</span>
-                </div>
-                <button onclick="clearAllHistory()"
-                    class="text-xs text-red-400 hover:text-red-300 hover:bg-red-500/10 px-3 py-1.5 rounded-lg transition font-semibold">
-                    <i class="fa-solid fa-trash-can mr-1"></i>Hapus Semua
-                </button>
-            </div>
 
-            <!-- History List -->
-            <div class="p-4 max-h-[300px] overflow-y-auto">
-                <div id="historyEmpty" class="text-center py-6">
-                    <p class="text-xs text-slate-600">Belum ada history. Generate desain pertama Anda!</p>
-                </div>
-                <div id="historyList" class="space-y-2"></div>
-            </div>
-        </div>
-    </section>
 
     <!-- Footer -->
     <footer class="text-center py-4 text-xs text-slate-600 border-t border-slate-800/50">
@@ -262,37 +235,7 @@
             class="text-emerald-400">ezdxf</span>
     </footer>
 
-    <!-- Delete Confirmation Modal -->
-    <div id="deleteModal" class="fixed inset-0 z-[100] hidden items-center justify-center">
-        <!-- Backdrop -->
-        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeDeleteModal()"></div>
-        <!-- Modal Card -->
-        <div
-            class="relative bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl shadow-black/40 p-6 w-full max-w-sm mx-4 animate-[fadeIn_0.2s_ease-out]">
-            <div class="flex flex-col items-center text-center">
-                <!-- Icon -->
-                <div class="w-14 h-14 bg-red-500/15 rounded-full flex items-center justify-center mb-4">
-                    <i class="fa-solid fa-trash-can text-red-400 text-xl"></i>
-                </div>
-                <!-- Title -->
-                <h3 id="deleteModalTitle" class="text-lg font-bold text-white mb-2">Hapus Entry?</h3>
-                <!-- Message -->
-                <p id="deleteModalMsg" class="text-sm text-slate-400 mb-6">Data yang dihapus tidak dapat dikembalikan.
-                </p>
-                <!-- Buttons -->
-                <div class="flex gap-3 w-full">
-                    <button onclick="closeDeleteModal()"
-                        class="flex-1 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-slate-300 hover:bg-slate-700 font-semibold text-sm transition">
-                        Batal
-                    </button>
-                    <button id="deleteModalConfirm" onclick="confirmDelete()"
-                        class="flex-1 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-semibold text-sm transition shadow-lg shadow-red-600/25">
-                        Hapus
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     <script src="/static/js/app.js"></script>
 </body>

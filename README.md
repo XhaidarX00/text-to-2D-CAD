@@ -151,26 +151,7 @@ Berikut adalah fitur-fitur tambahan yang melampaui requirement asli, beserta **a
 
 ---
 
-### 6. 📊 History Database (JSON CRUD)
-
-| Aspek | Task Asli | Improvisasi |
-|-------|----------|-------------|
-| **Penyimpanan** | Tidak ada | JSON file database dengan CRUD API |
-| **Riwayat** | Tidak ada | Seluruh history generate tersimpan, dapat di-load ulang |
-
-**Alasan:** Dalam workflow nyata, engineer perlu melacak iterasi desain. History memungkinkan revisit, bandingkan, dan kelola hasil generate.
-
-**Kelebihan:**
-- Auto-save setelah setiap generate (prompt, params, DXF filename, SVG preview)
-- Full REST API: GET (list/detail), PUT (edit), DELETE (single/clear all)
-- History panel di UI — klik untuk load ulang hasil, hover untuk hapus
-- Data persisten di `history.json`
-
-**File terkait:** `app/services/history_service.py`, `main.py` (5 CRUD endpoints)
-
----
-
-### 7. 🧊 3D Export dengan Chair Mesh
+### 6. 🧊 3D Export dengan Chair Mesh
 
 | Aspek | Task Asli | Improvisasi |
 |-------|----------|-------------|
@@ -188,7 +169,7 @@ Berikut adalah fitur-fitur tambahan yang melampaui requirement asli, beserta **a
 
 ---
 
-### 8. 🧪 Unit Testing
+### 7. 🧪 Unit Testing
 
 | Aspek | Task Asli | Improvisasi |
 |-------|----------|-------------|
@@ -215,23 +196,23 @@ Berikut adalah fitur-fitur tambahan yang melampaui requirement asli, beserta **a
 ├─────────────────────────────────────────────────────────┤
 │                    FastAPI Backend                        │
 │            main.py — Routes + API Endpoints              │
-├───────────────┬──────────────┬──────────────────────────┤
-│   AI Services │  CAD Engine  │     History Service       │
-│ ┌───────────┐ │ ┌──────────┐ │  ┌────────────────────┐  │
-│ │ Reasoning │ │ │  Shapes  │ │  │  JSON CRUD         │  │
-│ │ (Llama3.3)│ │ │ (Box,Cyl)│ │  │  (history.json)    │  │
-│ ├───────────┤ │ ├──────────┤ │  └────────────────────┘  │
-│ │   Audio   │ │ │ Advanced │ │                          │
-│ │ (Whisper) │ │ │(Chair,   │ │                          │
-│ ├───────────┤ │ │ Room)    │ │                          │
-│ │  Vision   │ │ ├──────────┤ │                          │
-│ │(Llama4    │ │ │ Factory  │ │                          │
-│ │ Scout)    │ │ ├──────────┤ │                          │
-│ └───────────┘ │ │SVG Export│ │                          │
-│               │ ├──────────┤ │                          │
-│               │ │3D Export │ │                          │
-│               │ └──────────┘ │                          │
-├───────────────┴──────────────┴──────────────────────────┤
+├───────────────────────────┬──────────────────────────────┤
+│       AI Services         │         CAD Engine           │
+│ ┌───────────┐             │ ┌──────────┐                 │
+│ │ Reasoning │             │ │  Shapes  │                 │
+│ │ (Llama3.3)│             │ │ (Box,Cyl)│                 │
+│ ├───────────┤             │ ├──────────┤                 │
+│ │   Audio   │             │ │ Advanced │                 │
+│ │ (Whisper) │             │ │(Chair,   │                 │
+│ ├───────────┤             │ │ Room)    │                 │
+│ │  Vision   │             │ ├──────────┤                 │
+│ │(Llama4    │             │ │ Factory  │                 │
+│ │ Scout)    │             │ ├──────────┤                 │
+│ └───────────┘             │ │SVG Export│                 │
+│                           │ ├──────────┤                 │
+│                           │ │3D Export │                 │
+│                           │ └──────────┘                 │
+├───────────────────────────┴──────────────────────────────┤
 │                  Groq Cloud API                          │
 │     Llama 3.3 70B · Llama 4 Scout · Whisper v3 Turbo    │
 └─────────────────────────────────────────────────────────┘
@@ -247,7 +228,6 @@ Berikut adalah fitur-fitur tambahan yang melampaui requirement asli, beserta **a
 | SVG Preview | Custom converter | DXF → SVG with dark theme, auto-scale |
 | 3D Engine | trimesh | Box/cylinder/chair primitives → STL |
 | Frontend | Tailwind CSS + Vanilla JS | Dark mode, animations, responsive |
-| Database | JSON file | Lightweight, zero-config, persistent |
 | Testing | pytest | 20+ unit tests, offline-capable |
 
 ---
@@ -370,14 +350,6 @@ AI akan menggabungkan seluruh informasi sebagai konteks untuk menghasilkan param
 - **Export 3D (STL)** — Model 3D yang dapat dibuka di Blender, PrusaSlicer, atau 3D viewer lainnya
 - **SVG Preview** — Ditampilkan langsung di browser
 
-### History
-
-- Setiap hasil generate otomatis tersimpan di panel **History** (bagian bawah halaman)
-- Klik entry history untuk memuat ulang hasilnya
-- Hover entry untuk tombol hapus → muncul **confirmation modal** sebelum menghapus
-- Tombol **Hapus Semua** → modal konfirmasi dengan pesan berbeda
-- Modal dark-themed dengan backdrop blur dan tombol Batal/Hapus
-
 ---
 
 ## 📐 Contoh Output
@@ -415,11 +387,6 @@ Setiap file DXF menggunakan layer standar:
 | `GET` | `/download/{filename}` | Download file DXF |
 | `POST` | `/api/export-3d/{filename}` | Export DXF → STL 3D |
 | `GET` | `/download-3d/{filename}` | Download file STL |
-| `GET` | `/api/history` | List semua history |
-| `GET` | `/api/history/{id}` | Detail satu entry |
-| `PUT` | `/api/history/{id}` | Update entry (prompt/params) |
-| `DELETE` | `/api/history/{id}` | Hapus satu entry |
-| `DELETE` | `/api/history` | Hapus semua history |
 
 Dokumentasi API interaktif tersedia di: **http://localhost:8000/docs** (Swagger UI)
 
@@ -456,7 +423,6 @@ CADPROJECT/
 ├── requirements.txt               # Dependencies
 ├── .env                           # API Key configuration
 ├── .gitignore                     # Git ignore rules
-├── history.json                   # History database (auto-generated)
 │
 ├── app/
 │   ├── __init__.py
@@ -471,8 +437,7 @@ CADPROJECT/
 │   ├── services/
 │   │   ├── reasoning_service.py   # Llama 3.3 — text → JSON params (streaming)
 │   │   ├── audio_service.py       # Whisper — audio → text transcription
-│   │   ├── vision_service.py      # Llama 4 Scout — image → text description
-│   │   └── history_service.py     # JSON CRUD for generation history
+│   │   └── vision_service.py      # Llama 4 Scout — image → text description
 │   │
 │   └── cad_engine/
 │       ├── base.py                # Abstract CADObject (layers, dimensions)
@@ -487,7 +452,7 @@ CADPROJECT/
 │
 ├── static/
 │   ├── css/custom.css             # Custom animations
-│   └── js/app.js                  # Frontend logic (recording, API, history)
+│   └── js/app.js                  # Frontend logic (recording, API, state)
 │
 ├── tests/
 │   └── test_cad_engine.py         # 20+ unit tests

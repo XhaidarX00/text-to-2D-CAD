@@ -13,7 +13,7 @@ from app.services.vision_service import VisionService
 from app.cad_engine.factory import CADFactory
 from app.cad_engine.svg_exporter import dxf_to_svg
 from app.cad_engine.exporter_3d import export_3d_stl
-from app.services.history_service import create_entry as history_create, get_all_entries as history_list, get_entry as history_get, update_entry as history_update, delete_entry as history_delete, clear_all as history_clear
+
 
 app = FastAPI(title=settings.PROJECT_NAME, version=settings.VERSION)
 
@@ -102,21 +102,12 @@ async def generate_cad(
         except Exception as e:
             print(f"SVG Preview Error: {e}")
 
-        # 7. Save to history
-        history_entry = history_create(
-            prompt=final_prompt.strip(),
-            params=params,
-            dxf_filename=filename,
-            svg_preview=svg_preview,
-        )
-
         return {
             "status": "success",
             "data": params,
             "download_url": f"/download/{filename}",
             "svg_preview": svg_preview,
             "original_prompt": final_prompt.strip(),
-            "history_id": history_entry["id"],
         }
 
     except Exception as e:
@@ -150,11 +141,6 @@ async def export_3d(filename: str):
     success = export_3d_stl(params, stl_path)
 
     if success:
-        # Update history with STL filename
-        history_update(
-            _params_cache.get(f"{filename}_history_id", ""),
-            {"stl_filename": stl_filename}
-        )
         return {
             "status": "success",
             "download_url": f"/download-3d/{stl_filename}"
@@ -175,48 +161,7 @@ async def download_stl(filename: str):
     return FileResponse(filepath, filename=filename, media_type="application/sla")
 
 
-# ==================== History CRUD API ====================
 
-@app.get("/api/history")
-async def list_history():
-    """Get all CAD generation history entries."""
-    entries = history_list()
-    return {"status": "success", "data": entries, "count": len(entries)}
-
-
-@app.get("/api/history/{entry_id}")
-async def get_history_entry(entry_id: str):
-    """Get a single history entry by ID."""
-    entry = history_get(entry_id)
-    if entry is None:
-        return JSONResponse({"status": "error", "message": "Entry not found"}, status_code=404)
-    return {"status": "success", "data": entry}
-
-
-@app.put("/api/history/{entry_id}")
-async def update_history_entry(entry_id: str, request: Request):
-    """Update a history entry (prompt or params)."""
-    body = await request.json()
-    updated = history_update(entry_id, body)
-    if updated is None:
-        return JSONResponse({"status": "error", "message": "Entry not found"}, status_code=404)
-    return {"status": "success", "data": updated}
-
-
-@app.delete("/api/history/{entry_id}")
-async def delete_history_entry(entry_id: str):
-    """Delete a single history entry."""
-    deleted = history_delete(entry_id)
-    if not deleted:
-        return JSONResponse({"status": "error", "message": "Entry not found"}, status_code=404)
-    return {"status": "success", "message": "Entry deleted"}
-
-
-@app.delete("/api/history")
-async def clear_history():
-    """Delete all history entries."""
-    count = history_clear()
-    return {"status": "success", "message": f"{count} entries deleted"}
 
 
 if __name__ == "__main__":
