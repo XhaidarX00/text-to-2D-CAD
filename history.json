@@ -1,0 +1,32 @@
+[
+  {
+    "id": "3e40c5df-175f-4c35-8a62-ba8a253d468b",
+    "created_at": "2026-02-18T16:29:45.936123+00:00",
+    "updated_at": "2026-02-18T16:29:45.936133+00:00",
+    "prompt": "Ruangan ukuran 4x5 meter, dengan 1 pintu di sisi barat dan 1 jendela di sisi utara",
+    "params": {
+      "shape_type": "room",
+      "width": 400.0,
+      "length": 500.0,
+      "height": 250.0,
+      "diameter": null,
+      "legs": null,
+      "doors": [
+        {
+          "wall": "west",
+          "width": 100.0
+        }
+      ],
+      "windows": [
+        {
+          "wall": "north",
+          "width": 150.0
+        }
+      ],
+      "description": "Ruangan dengan ukuran 4x5 meter"
+    },
+    "dxf_filename": "c752cffa-c0ac-4e12-87ad-218cf3de664a.dxf",
+    "stl_filename": null,
+    "svg_preview": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"-207.5 -387.5 1290.0 1025.0\" \nwidth=\"800\" height=\"600\" style=\"background:#0f172a;border-radius:12px;\">\n<g transform=\"translate(0, 250.0) scale(1, -1)\">\n<g transform=\"translate(0.0,530.0) scale(1,-1)\"><text font-size=\"4.0\" fill=\"#4ade80\" font-family=\"monospace\">DENAH RUANGAN (TAMPAK ATAS)</text></g>\n<polygon points=\"0.0,0.0 400.0,0.0 400.0,500.0 0.0,500.0\" fill=\"none\" stroke=\"#e2e8f0\" stroke-width=\"1\"/>\n<line x1=\"0.0\" y1=\"200.0\" x2=\"100.0\" y2=\"200.0\" stroke=\"#e2e8f0\" stroke-width=\"1\"/>\n<path d=\"M 100.0 200.0 A 100.0 100.0 0 0 1 0.0 300.0\" fill=\"none\" stroke=\"#e2e8f0\" stroke-width=\"1\"/>\n<line x1=\"125.0\" y1=\"497.0\" x2=\"275.0\" y2=\"497.0\" stroke=\"#e2e8f0\" stroke-width=\"1\"/>\n<line x1=\"125.0\" y1=\"500.0\" x2=\"275.0\" y2=\"500.0\" stroke=\"#e2e8f0\" stroke-width=\"1\"/>\n<line x1=\"125.0\" y1=\"503.0\" x2=\"275.0\" y2=\"503.0\" stroke=\"#e2e8f0\" stroke-width=\"1\"/>\n<line x1=\"0.0\" y1=\"-25.0\" x2=\"400.0\" y2=\"-25.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<line x1=\"0.0\" y1=\"0.0\" x2=\"0.0\" y2=\"-25.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<line x1=\"400.0\" y1=\"0.0\" x2=\"400.0\" y2=\"-25.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<g transform=\"translate(200.0,-30.0) scale(1,-1)\"><text font-size=\"3.0\" fill=\"#f87171\" font-family=\"monospace\">400</text></g>\n<line x1=\"425.0\" y1=\"0.0\" x2=\"425.0\" y2=\"500.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<line x1=\"400.0\" y1=\"0.0\" x2=\"425.0\" y2=\"0.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<line x1=\"400.0\" y1=\"500.0\" x2=\"425.0\" y2=\"500.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<g transform=\"translate(417.0,250.0) scale(1,-1)\"><text font-size=\"3.0\" fill=\"#f87171\" font-family=\"monospace\">500</text></g>\n<g transform=\"translate(0.0,15.0) scale(1,-1)\"><text font-size=\"4.0\" fill=\"#4ade80\" font-family=\"monospace\">TAMPAK DEPAN</text></g>\n<polygon points=\"0.0,-250.0 400.0,-250.0 400.0,0.0 0.0,0.0\" fill=\"none\" stroke=\"#93c5fd\" stroke-width=\"1\"/>\n<polygon points=\"150.0,-250.0 250.0,-250.0 250.0,-75.0 150.0,-75.0\" fill=\"none\" stroke=\"#93c5fd\" stroke-width=\"1\"/>\n<polygon points=\"125.0,-162.5 275.0,-162.5 275.0,-87.5 125.0,-87.5\" fill=\"none\" stroke=\"#93c5fd\" stroke-width=\"1\"/>\n<line x1=\"0.0\" y1=\"-275.0\" x2=\"400.0\" y2=\"-275.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<line x1=\"0.0\" y1=\"-250.0\" x2=\"0.0\" y2=\"-275.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<line x1=\"400.0\" y1=\"-250.0\" x2=\"400.0\" y2=\"-275.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<g transform=\"translate(200.0,-280.0) scale(1,-1)\"><text font-size=\"3.0\" fill=\"#f87171\" font-family=\"monospace\">400</text></g>\n<line x1=\"-25.0\" y1=\"-250.0\" x2=\"-25.0\" y2=\"0.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<line x1=\"0.0\" y1=\"-250.0\" x2=\"-25.0\" y2=\"-250.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<line x1=\"0.0\" y1=\"0.0\" x2=\"-25.0\" y2=\"0.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<g transform=\"translate(-33.0,-125.0) scale(1,-1)\"><text font-size=\"3.0\" fill=\"#f87171\" font-family=\"monospace\">250</text></g>\n<g transform=\"translate(450.0,15.0) scale(1,-1)\"><text font-size=\"4.0\" fill=\"#4ade80\" font-family=\"monospace\">TAMPAK SAMPING</text></g>\n<polygon points=\"450.0,-250.0 950.0,-250.0 950.0,0.0 450.0,0.0\" fill=\"none\" stroke=\"#22d3ee\" stroke-width=\"1\"/>\n<polygon points=\"650.0,-250.0 750.0,-250.0 750.0,-75.0 650.0,-75.0\" fill=\"none\" stroke=\"#22d3ee\" stroke-width=\"1\"/>\n<line x1=\"450.0\" y1=\"-275.0\" x2=\"950.0\" y2=\"-275.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<line x1=\"450.0\" y1=\"-250.0\" x2=\"450.0\" y2=\"-275.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<line x1=\"950.0\" y1=\"-250.0\" x2=\"950.0\" y2=\"-275.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<g transform=\"translate(700.0,-280.0) scale(1,-1)\"><text font-size=\"3.0\" fill=\"#f87171\" font-family=\"monospace\">500</text></g>\n<line x1=\"975.0\" y1=\"-250.0\" x2=\"975.0\" y2=\"0.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<line x1=\"950.0\" y1=\"-250.0\" x2=\"975.0\" y2=\"-250.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<line x1=\"950.0\" y1=\"0.0\" x2=\"975.0\" y2=\"0.0\" stroke=\"#f87171\" stroke-width=\"0.5\"/>\n<g transform=\"translate(967.0,-125.0) scale(1,-1)\"><text font-size=\"3.0\" fill=\"#f87171\" font-family=\"monospace\">250</text></g>\n</g>\n</svg>"
+  }
+]

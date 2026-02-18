@@ -1,0 +1,15 @@
+fastapi
+uvicorn[standard]
+python-multipart
+jinja2
+groq
+ezdxf
+python-dotenv
+pydantic
+Pillow
+svgwrite
+trimesh
+numpy-stl
+numpy
+pytest
+httpx
